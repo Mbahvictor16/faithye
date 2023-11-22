@@ -1,0 +1,7 @@
+:root {
+  --primary-color: #ffc0cb;
+  --secondary-color: rgb(212, 121, 136);
+  --secondary-shadow-color: rgba(212, 121, 136, 0.38);
+  --error: #ff0000;
+  --success: #008000;
+}

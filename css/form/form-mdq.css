@@ -1,0 +1,44 @@
+@media (min-width: 1024px) {
+  .form-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .svg-bg {
+    margin-top: 0;
+    height: 100%;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-svg {
+    background: url(../../assets/svg/undraw_sign_in_re_o58h.svg);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 60%;
+    width: 60%;
+    margin: 0;
+  }
+
+  .form-div {
+    margin-top: 0;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-div form {
+    width: 90%;
+  }
+
+  .form-box,
+  .forgot-password,
+  .consent-box {
+    width: 70%;
+  }
+}

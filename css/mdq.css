@@ -1,0 +1,80 @@
+@media screen and (min-width: 425px) {
+  .product-filter {
+    margin: 0;
+  }
+
+  .product-heading {
+    visibility: visible;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  header {
+    padding: 12px 24px;
+  }
+
+  .header-block nav ul {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .header-block nav {
+    width: clamp(35em, 15vw, 60em);
+    border: none;
+    background: transparent;
+  }
+
+  .hamburger-menu {
+    display: none;
+  }
+
+  div[style="font-size: 3rem; font-weight: bold"] {
+    display: none;
+  }
+
+  .hero-container {
+    width: 50%;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .hero-title {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: initial;
+  }
+
+  .hero-text {
+    margin: auto;
+  }
+
+  .hero-banner {
+    height: inherit;
+    padding-top: 20px;
+    display: block;
+  }
+
+  .hero-img {
+    margin-left: 40px;
+    height: 70%;
+    width: 70%;
+  }
+
+  .product-div {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  body {
+    font-size: 16px;
+  }
+
+  .product-container {
+    justify-content: start;
+  }
+}

@@ -1,0 +1,312 @@
+body.stop-scroll {
+  overflow: hidden;
+}
+
+/* ------------------ HEADER START ---------------------- */
+
+header {
+  padding: 4px 8px;
+}
+
+.header-block {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.header-block ul {
+  list-style: none;
+}
+
+.logo-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-menu {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 6px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  transition: all 0.5s ease-in-out;
+}
+
+.hamburger-menu > div {
+  width: 100%;
+  height: 2px;
+  background: #000;
+  transition: all 0.5s ease-in-out;
+  transform-origin: center;
+}
+
+.hamburger-menu.open {
+  justify-content: center;
+}
+
+.hamburger-menu.open > div:nth-child(1) {
+  transform: rotate(-45deg);
+  margin-bottom: -1.5px;
+}
+
+.hamburger-menu.open > div:nth-child(2) {
+  visibility: hidden;
+  transition: all 0.1s ease-in-out;
+}
+
+.hamburger-menu.open > div:nth-child(3) {
+  transform: rotate(45deg);
+  margin-top: -1.5px;
+}
+
+.logo {
+  font-family: fantasy;
+  font-size: 2rem;
+}
+
+header.bend-nav .nav {
+  position: absolute;
+  inset: 0;
+  height: 100dvh;
+  width: 100%;
+  transform: translateX(-100%);
+  transition: all 0.5s ease-in-out;
+  z-index: 1;
+}
+
+header.bend-nav .nav ul li {
+  text-align: center;
+  margin-block: 32px;
+}
+
+header nav {
+  background: #fff;
+  width: 70%;
+  height: 100%;
+  border: 1px solid #000;
+}
+
+header div.nav.show {
+  transform: translateX(0);
+}
+
+div[style="font-size: 3rem; font-weight: bold"] {
+  margin: 8px 12px;
+}
+
+.header-block nav ul {
+  list-style: none;
+}
+
+.user ul {
+  display: flex;
+  column-gap: 6px;
+}
+
+.user ul .register {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.user ul .login {
+  border: 1px solid var(--primary-color);
+}
+
+.search-box {
+  width: fit-content;
+  margin: auto;
+}
+
+:where(.search-box, .product-filter)
+  form
+  :where(input[type="submit"], button[type="submit"]) {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  cursor: pointer;
+  margin-left: -8px;
+  padding-block: 6px;
+}
+
+:where(.search-box, .product-filter)
+  form
+  :where(input[type="search"], input[type="text"]) {
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+:where(input[type="search"], input[type="text"]) {
+  border: none;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+:where(input[type="search"]:focus, input[type="text"]:focus) {
+  border: none;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-right: none !important;
+  outline: none !important;
+}
+
+:where(input[type="search"], input[type="text"]):focus
+  ~ :where(input[type="search"], input[type="text"]) {
+  outline: 1px solid var(--secondary-color);
+}
+
+/* ------------------ HEADER END ---------------------- */
+
+/* ------------------ HERO SECTION ---------------------- */
+
+.hero {
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-bg {
+  background: var(--primary-color);
+  height: 100%;
+}
+
+.hero-container {
+  height: inherit;
+}
+
+.hero-banner {
+  display: none;
+}
+
+.hero-title {
+  height: fit-content;
+}
+
+.hero-title.bend-nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+}
+
+.hero-text {
+  width: 25ch;
+  background-color: var(--secondary-color);
+  height: 24ch;
+  border-radius: 50%;
+  box-shadow: -250px 50px 0px var(--secondary-shadow-color),
+    150px 50px 0px var(--secondary-shadow-color);
+  margin: auto;
+}
+
+.hero-text h1 {
+  margin-bottom: 16px;
+  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-text a {
+  border: 1px solid black !important;
+}
+
+.hero-text a:hover {
+  background: #ffffff !important;
+}
+
+.hero-img {
+  background: var(--secondary-color);
+  margin-block: auto;
+  border-radius: 100%;
+  box-shadow: 150px 105px 0px var(--secondary-shadow-color);
+}
+
+/* ------------------ HERO SECTION ENDS ---------------------- */
+
+/* ------------------ HOT PRODUCT SECTION  ---------------------- */
+
+.product-heading {
+  visibility: collapse;
+}
+
+.title-heading-search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-inline: 2em;
+}
+
+.product-filter {
+  margin: auto;
+}
+
+.product-bg {
+  margin-top: 40px;
+}
+
+.product-div h1.bend-nav {
+  text-align: center;
+}
+
+.product-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 25%;
+}
+
+.product-text {
+  font-size: 1.05em;
+  font-weight: 400;
+}
+
+.product-price {
+  margin-block: 5px;
+  font-weight: bolder;
+  font-size: 0.8em;
+  text-align: right;
+}
+
+.view-link {
+  display: block;
+  background: #000;
+  text-align: center;
+  color: #ffffff;
+  font-size: 0.75em;
+  padding-block: 12px;
+}
+
+/* ---------------- FOOTER ---------------- */
+footer {
+  background: #222;
+  color: #ccc;
+  padding: max(20px, 5%);
+  margin-top: 48px;
+}
+
+footer a {
+  color: #ccc !important;
+}
+
+footer input {
+  background: #222;
+  border: 1px solid #777 !important;
+  color: #ccc;
+}
+
+.nav--footer {
+  margin: 24px;
+}
+
+.nav--footer li {
+  margin-block: 6px;
+}

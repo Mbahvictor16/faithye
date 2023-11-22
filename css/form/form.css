@@ -1,0 +1,126 @@
+main.form-bg {
+  width: 100dvw;
+  height: 100dvh;
+  overflow: hidden auto;
+}
+
+.form-section {
+  width: 100%;
+  height: 100%;
+}
+
+.svg-bg {
+  width: min(100%, 500px);
+  height: 200px;
+  margin-top: 30%;
+  margin-inline: auto;
+}
+
+.form-div {
+  margin-top: clamp(20px, 10vw, 30px);
+  width: min(80%, 300px);
+  margin-inline: auto;
+}
+
+label {
+  margin-bottom: 2px;
+  display: block;
+  width: fit-content;
+}
+
+.form-box {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form-box input {
+  width: 100%;
+}
+
+.form-box input[type="submit"] {
+  background: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+
+.form-box :not(input[type="submit"], label, div, small, ul, li) {
+  border: 1px solid #000;
+  font-weight: lighter;
+}
+
+.form-box input:not(input[type="submit"], label):focus {
+  border: 1px solid #000;
+  outline: 1px solid black;
+}
+
+.register-link {
+  font-size: 0.75em;
+  margin-bottom: 12px;
+}
+
+.register-link a {
+  color: var(--secondary-color);
+}
+
+.forgot-password {
+  margin-bottom: 3px;
+  text-align: right;
+  font-size: 12px;
+}
+
+.forgot-password a:active {
+  color: var(--primary-color);
+}
+
+.forgot-password a:hover {
+  color: var(--primary-color) !important;
+}
+
+.form-svg {
+  background: url(../../assets/svg/undraw_login_re_4vu2.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: min(70%, 500px);
+  margin-inline: auto;
+}
+
+.form-svg.register {
+  background: url(../../assets/svg/undraw_sign_up_n6im.svg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: min(70%, 500px);
+  margin-inline: auto;
+}
+
+.consent-box {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.consent-box > * {
+  cursor: pointer;
+}
+
+.consent-box input {
+  margin-right: 3px;
+}
+
+.password-valid-details {
+  display: none;
+}
+
+#data-password-details {
+  display: block;
+}
+
+#data-password-details ul li {
+  font-size: 0.65em;
+  list-style: none;
+  margin-block: 2px;
+}
