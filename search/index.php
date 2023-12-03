@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
-    <title>Shop</title>
+    <title>Search Results</title>
 </head>
 
 <body>
@@ -13,11 +13,6 @@
     include "../config.php";
     include "../cart/cart.php";
     include "../auth-user.php";
-
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"])) {
-        $q = $_POST["search"];
-        header("Location: ../search?q=$q");
-    }
     ?>
     <header>
         <div class="header-block">
@@ -42,7 +37,7 @@
                     </div>
                     <ul>
                         <li><a href="../">Home</a></li>
-                        <li><a href="">Shop</a></li>
+                        <li><a href="../shop/">Shop</a></li>
                         <li><a href="../blog/">Blog</a></li>
                         <li><a href="../about/">About</a></li>
                     </ul>
@@ -108,12 +103,12 @@
             <div class="hot-product-bg product-bg">
                 <div class="hot-product-div product-div">
                     <div class="title-heading-search">
-                        <h1 class="product-heading">All Products</h1>
+                        <h1 class="product-heading">Search Products</h1>
 
                         <div class="product-filter">
-                            <form action="" class="search" method="post">
+                            <form action="" class="search" method="get">
                                 <div class="form-input">
-                                    <input type="text" name="search" id="search" placeholder="Search e.g Blue Water Lilies" />
+                                    <input type="text" name="q" id="search" placeholder="Search e.g Blue Water Lilies" />
                                     <button type="submit" class="form-btn">&rarr;</button>
                                 </div>
                             </form>
@@ -127,54 +122,68 @@
                         $page = isset($_GET["page"]) ? $_GET["page"] : 1;
                         $limit = 10;
                         $start = ($page - 1) * $limit;
-                        $sql_get_all = "SELECT * FROM products ORDER BY date_created DESC LIMIT $limit OFFSET $start";
+                        $q = isset($_GET["q"]) ? urldecode($_GET["q"]) : null;
+                        $arr_q = explode(" ", $q);
+                        $conditions = [];
+                        foreach ($arr_q as $key) {
+                            $conditions[] = "p_name LIKE '%$key%' OR p_name REGEXP '%$key%'";
+                        }
 
-                        $result = $conn_db->query($sql_get_all);
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) { ?>
-                                <div class="all-product product-card">
-                                    <div class="all-product-img-div product-img-div">
-                                        <img src="../<?php echo $row["img_path"]; ?>" alt="" class="all-product-img product-img">
-                                    </div>
-                                    <div class="all-product-title product-title">
-                                        <span class="all-product-text product-text">
-                                            <?php echo $row["p_name"]; ?>
-                                        </span>
-
-                                        <div class="all-product-price product-price">
-                                            <div class="price-div">
-                                                <span class="price">
-                                                    <?php echo $row["p_price"]; ?> NGN
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                        <div class="view-product">
-                                            <div class="action view btn">
-                                                <a href="../product?p_id=<?php echo $row["p_ID"]; ?>" class="btn view-link">
-                                                    View Product
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            <?php
-                            }
-                        } else { ?>
-                            <div style="text-align: center; color: #cccccc;">
-                                You don't have any products.
+                        $implode_q = implode(" OR ", $conditions);
+                        if ($q == null) {
+                        ?>
+                            <div style="text-align: center; color: #cccccc">
+                                Couldn't find any product
                             </div>
-                        <?php } ?>
+                            <?php } else {
+                            $sql_search = "SELECT * FROM products WHERE $implode_q ORDER BY date_created DESC LIMIT $limit OFFSET $start";
+                            $result = $conn_db->query($sql_search);
 
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) { ?>
+                                    <div class="all-product product-card">
+                                        <div class="all-product-img-div product-img-div">
+                                            <img src="../<?php echo $row["img_path"]; ?>" alt="" class="all-product-img product-img">
+                                        </div>
+                                        <div class="all-product-title product-title">
+                                            <span class="all-product-text product-text">
+                                                <?php echo $row["p_name"]; ?>
+                                            </span>
+
+                                            <div class="all-product-price product-price">
+                                                <div class="price-div">
+                                                    <span class="price">
+                                                        <?php echo $row["p_price"]; ?> NGN
+                                                    </span>
+                                                </div>
+                                            </div>
+
+                                            <div class="view-product">
+                                                <div class="action view btn">
+                                                    <a href="../product?p_id=<?php echo $row["p_ID"]; ?>" class="btn view-link">
+                                                        View Product
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <?php
+                                }
+                            } else { ?>
+                                <div style="text-align: center; color: #cccccc;">
+                                    Couldn't find any products.
+                                </div>
+                            <?php } ?>
+
+                        <?php } ?>
                     </div>
                 </div>
             </div>
         </section>
 
         <?php
-        $countItems = "SELECT COUNT(*) as totalItems FROM products";
+        $countItems = "SELECT COUNT(*) as totalItems FROM products WHERE $implode_q";
 
         $result = $conn_db->query($countItems);
 
@@ -228,48 +237,11 @@
         ?>
     </main>
 
-    <?php
-    if ($result) {
-        if ($result->num_rows > 0) {
-    ?>
-            <footer>
-                <h3>Fathiye</h3>
-
-                <div>
-                    <div class="nav--footer">
-                        <div role="navigation">
-                            <ul>
-                                <li><a href="../">Home</a></li>
-                                <li><a href="">Shop</a></li>
-                                <li><a href="../blog/">Blog</a></li>
-                                <li><a href="../about/">About</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="news-letter">
-                        <div class="search-div">
-                            <div class="search-box">
-                                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
-                                    <div style="margin-bottom: 6px;">
-                                        Sign up for our weekly newsletter?
-                                    </div>
-                                    <input type="email" name="news-letter" id="news-letter" placeholder="Type your email address" />
-                                    <button type="submit" class="form-btn" style="background: #ccc; border: 1px solid #ccc; border-radius: 3px;">&rarr;</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-    <?php }
-    } ?>
     <?php $conn_db->close() ?>
 
     <script src="../js/hamburger.js"></script>
     <script src="../js/mdq.js"></script>
     <script src="../js/history.js"></script>
-
 </body>
 
 </html>

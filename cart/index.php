@@ -16,6 +16,7 @@
     }
     include "../config.php";
     include "./cart.php";
+    include "../auth-user.php";
     ?>
     <header>
         <div class="header-block">

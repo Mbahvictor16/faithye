@@ -1,0 +1,68 @@
+.user-details {
+  width: min(90%, 500px);
+  margin: auto;
+}
+
+.user-info-div {
+  width: 90%;
+  height: 300px;
+  border-radius: 3px;
+  padding-top: 48px;
+  box-shadow: 5px 5px 8px #cccccc, -5px -5px 8px #cccccc, -5px 5px 8px #cccccc,
+    5px -5px 8px #cccccc;
+  margin-bottom: 64px;
+}
+
+.user-email-fl {
+  background-color: var(--primary-color);
+  font-size: 2.5em;
+  padding: 3px;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  width: 2.5em;
+  height: 2.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  margin-bottom: 12px;
+}
+
+.user-email-fw {
+  text-align: center;
+}
+
+.user-purchase-div {
+  margin-top: 64px;
+}
+
+.purchases {
+  margin-bottom: 6px;
+  padding-block: 3px;
+  border-bottom: 1px solid #444444;
+}
+
+.recent-purchases {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.recent-purchases a:hover {
+  color: var(--secondary-color);
+}
+
+.ref_id {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  color: #444444;
+}
+
+.date_purchased {
+  text-align: right;
+  color: #cccccc;
+}
+
+/*-------------PURCHASES-------------*/

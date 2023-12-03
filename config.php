@@ -26,12 +26,28 @@ if ($conn->query($sql_db) === TRUE) {
     echo "<pre style='display:none;'>Couldn't query</pre>";
 }
 
+$sql_user = "CREATE TABLE IF NOT EXISTS users (user_id VARCHAR(255) NOT NULL PRIMARY KEY UNIQUE, email VARCHAR(255) UNIQUE NOT NULL, pscd VARCHAR(255) NOT NULL)";
+
+if ($conn_db->query($sql_user)) {
+    echo "<pre style='display:none;'>Table created</pre>";
+} else {
+    echo "<pre style='display:none;'>could not create table</pre>";
+}
+
 $sql_newsletter = "CREATE TABLE IF NOT EXISTS newsletter (email VARCHAR(255) UNIQUE NOT NULL)";
 
 if ($conn_db->query($sql_newsletter)) {
     echo "<pre style='display:none;'>Table created</pre>";
 } else {
     echo "<pre style='display:none;'>could not create table</pre>";
+}
+
+$sql_table = "CREATE TABLE IF NOT EXISTS products (p_ID VARCHAR(255) PRIMARY KEY NOT NULL UNIQUE, p_name VARCHAR(255) NOT NULL, p_price DECIMAL(10,2) NOT NULL, p_quan INT(6) NOT NULL, p_description VARCHAR(500) NOT NULL, img_path VARCHAR(255) NOT NULL, date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL, date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL)";
+
+if ($conn_db->query($sql_table)) {
+    echo "<pre style='display:none;'>Table created</pre>";
+} else {
+    echo "<pre style='display:none;'>Couldn't create table</pre>";
 }
 
 $err = null;

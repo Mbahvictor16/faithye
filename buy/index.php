@@ -67,13 +67,13 @@
 
 <body>
     <?php
+    include "../config.php";
+    include "./sales.php";
+    include "../auth-user.php";
     if (empty($_COOKIE["cookie"])) {
         header("Location: ../login");
         exit;
     }
-
-    include "../config.php";
-    include "./sales.php";
     ?>
     <header class="product-details-header product-header">
         <span onclick="history.back()">
@@ -92,10 +92,31 @@
             $totalAmount = $_POST["TotalAmount"];
 
             if (empty($_GET["p_id"])) {
-                $sql_del_cart = "DELETE FROM cart WHERE user_id = '$user_id'";
+                $sql_get_sales = "SELECT * FROM cart RIGHT JOIN products ON cart.p_ID = products.p_ID WHERE user_id = '$user_id'";
 
-                if ($conn_db->query($sql_del_cart)) {
-                    header("Location: ../");
+                $sales = $conn_db->query($sql_get_sales);
+
+                if ($sales->num_rows > 0) {
+                    while ($product = $sales->fetch_assoc()) {
+                        $price = $product["p_price"];
+                        $p_id = $product["p_ID"];
+                        $quantity = $product["quantity"];
+                        $p_quan = $product["p_quan"];
+
+                        $Amount = $price * $quantity;
+
+                        $new_quan = $p_quan - $quantity;
+
+                        $sql_insert_sales = "INSERT INTO sales (user_id, p_id, p_quan, TotalAmount, ref_id) VALUES ('$user_id', '$p_id', '$quantity', '$Amount', '$ref_id')";
+
+                        $sql_update_product_quantity = "UPDATE products SET p_quan = '$new_quan' WHERE p_ID = '$p_id'";
+
+                        $sql_del_cart = "DELETE FROM cart WHERE p_ID = '$p_id' AND user_id = '$user_id'";
+
+                        if ($conn_db->query($sql_insert_sales) && $conn_db->query($sql_update_product_quantity) && $conn_db->query($sql_del_cart)) {
+                            header("Location: ../");
+                        }
+                    }
                 }
             }
 

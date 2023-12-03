@@ -65,6 +65,8 @@
     <?php
     include "../config.php";
     include "../cart/cart.php";
+    include "../auth-user.php";
+
 
     if (isset($_POST["buy-now"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
         $dialog = false;

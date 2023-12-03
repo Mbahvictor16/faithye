@@ -1,7 +1,8 @@
 const email = document.querySelector("[data-email]");
 const password = document.querySelector("[data-password]");
 const confirmPassword = document.querySelector("[data-confirm-password]");
-const form = document.querySelector("form");
+const form =
+  document.querySelector("#data-edit") ?? document.querySelector("form");
 const validateEmail = document.querySelector("[data-validate-email]");
 const passwordDataSmallCaps = document.querySelector(
   "[password-data-small-caps]"
@@ -97,6 +98,9 @@ password.addEventListener("input", (e) => {
 
 confirmPassword.addEventListener("input", function (e) {
   if (password.value !== e.target.value) {
+    if (passwordMatch.classList.contains("success")) {
+      passwordMatch.classList.remove("success");
+    }
     passwordMatch.classList.add("error");
     passwordMatch.textContent = "Password don't match";
   } else {
