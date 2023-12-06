@@ -22,13 +22,11 @@
     include "./config.php";
     include "./cart/cart.php";
     include "./buy/sales.php";
+    include "./auth-user.php";
 
-    $sql_user = "CREATE TABLE IF NOT EXISTS users (user_id VARCHAR(255) NOT NULL PRIMARY KEY UNIQUE, email VARCHAR(255) UNIQUE NOT NULL, pscd VARCHAR(255) NOT NULL)";
-
-    if ($conn_db->query($sql_user)) {
-        echo "<pre style='display:none;'>Table created</pre>";
-    } else {
-        echo "<pre style='display:none;'>could not create table</pre>";
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["search"])) {
+        $q = $_POST["search"];
+        header("Location: ./search?q=$q");
     }
     ?>
     <header>
@@ -116,9 +114,9 @@
 
         <div class="search-div">
             <div class="search-box">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="get">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) ?>" method="post">
                     <input type="search" name="search" id="search" placeholder="Search e.g Blue Water Lilies" />
-                    <input type="submit" value="Search" class="form-btn" name="Search-get" />
+                    <input type="submit" value="Search" class="form-btn" />
                 </form>
             </div>
         </div>
