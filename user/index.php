@@ -187,7 +187,7 @@
             </div>
         </section>
         <?php
-        $get_purchases = "SELECT DISTINCT ref_id, date_purchased FROM sales WHERE user_id = '$user' LIMIT 5";
+        $get_purchases = "SELECT DISTINCT ref_id, date_purchased FROM sales WHERE user_id = '$user' ORDER BY date_purchased DESC LIMIT 5";
 
         $all_purchases = $conn_db->query($get_purchases);
 

@@ -33,5 +33,13 @@ if ($conn_db->query($sql_table) === TRUE) {
 } else {
     echo "";
 }
+
+$sql_blog = "CREATE TABLE IF NOT EXISTS blogs (b_id VARCHAR(255) PRIMARY KEY NOT NULL, title VARCHAR(255) NOT NULL, b_img BLOB, img_type CHAR(6), article TEXT NOT NULL)";
+
+if ($conn_db->query($sql_blog)) {
+    echo "<pre style='display:none;'>Table created</pre>";
+} else {
+    echo "<pre style='display:none;'>Couldn't create table</pre>";
+}
 $err = null;
 $updated = null;

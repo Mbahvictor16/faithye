@@ -28,7 +28,7 @@
     <main>
         <?php
         $user = $_COOKIE["cookie"];
-        $get_purchases = "SELECT DISTINCT ref_id, date_purchased FROM sales WHERE user_id = '$user'";
+        $get_purchases = "SELECT DISTINCT ref_id, date_purchased FROM sales WHERE user_id = '$user' ORDER BY date_purchased DESC";
 
         $all_purchases = $conn_db->query($get_purchases);
 
