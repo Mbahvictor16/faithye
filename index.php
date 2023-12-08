@@ -259,6 +259,42 @@
                 </a>
             </div>
         </section>
+
+        <section class="new-product-section product-section">
+            <div class="new-product-bg product-bg">
+                <div class="new-product-div product-div">
+                    <h1>RECENT BLOGS</h1>
+
+                    <div class="new-product-container product-container">
+                        <?php
+                        $sql_get = "SELECT * FROM blogs";
+
+                        $result = $conn_db->query($sql_get);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                        ?>
+                                <div class="new-product product-card">
+                                    <a href="./blog/article?b_id=<?php echo $row["b_id"] ?>">
+                                        <div class="new-product-img-div product-img-div">
+                                            <img src="data:<?php echo $row["img_type"] ?>;base64,<?php echo $row["b_img"]; ?>" alt="" class="new-product-img product-img">
+                                        </div>
+                                        <div class="new-product-title product-title">
+                                            <span class="new-product-text product-text">
+                                                <?php echo $row["title"] ?>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </div>
+                            <?php }
+                        } else { ?>
+                            <div class="hide"></div>
+                        <?php } ?>
+
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer>

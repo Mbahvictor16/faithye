@@ -29,12 +29,25 @@
                 </div>
                 <nav>
                     <ul>
+                        <li><a href="">Home</a></li>
+                    </ul>
+                    <ul class="product-nav">
+                        <h3>Products</h3>
                         <li>
-                            <a href="./all_products/">All Products</a>
+                            <a href="./products/all_products/">All Products</a>
                         </li>
                         <li>
-                            <a href="./add_products/">Add Products</a>
+                            <a href="./products/add_products/">Add Products</a>
                         </li>
+
+                    </ul>
+
+                    <ul class="blog-nav">
+                        <h3>Blogs</h3>
+
+                        <li><a href="./blogs/all_blogs/">All Blogs</a></li>
+                        <li><a href="./blogs/add_blogs/">Add Blogs</a></li>
+
                     </ul>
                 </nav>
             </div>

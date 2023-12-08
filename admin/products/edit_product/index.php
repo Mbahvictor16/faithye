@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <link rel="stylesheet" href="../../../css/admin/admin.css">
     <title>Document</title>
 
     <style>
@@ -42,14 +42,14 @@
 
 <body>
     <?php
-    include "../admin.php";
+    include "../../admin.php";
     if (!isset($_COOKIE["cookie"])) {
-        header("Location: ../../login");
+        header("Location: ../../../login");
         exit;
     }
     session_start();
     if (empty($_SESSION["session_admin"])) {
-        header("Location: ../login");
+        header("Location: ../../login");
     }
     ?>
 
@@ -61,12 +61,25 @@
                 </div>
                 <nav>
                     <ul>
-                        <li>
-                            <a href="../">Home</a>
-                        </li>
+                        <li><a href="../../">Home</a></li>
+                    </ul>
+                    <ul class="product-nav">
+                        <h3>Products</h3>
                         <li>
                             <a href="../all_products/">All Products</a>
                         </li>
+                        <li>
+                            <a href="../add_products/">Add Products</a>
+                        </li>
+
+                    </ul>
+
+                    <ul class="blog-nav">
+                        <h3>Blogs</h3>
+
+                        <li><a href="../../blogs/all_blogs/">All Blogs</a></li>
+                        <li><a href="../../blogs/add_blogs/">Add Blogs</a></li>
+
                     </ul>
                 </nav>
             </div>
@@ -78,9 +91,10 @@
 
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["LOGOUT"])) {
+                    session_start();
                     session_unset();
                     session_destroy();
-                    header("Location: ../login");
+                    header("Location: ../../login");
                 }
                 ?>
             </div>
@@ -107,13 +121,13 @@
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $imgPath = "../../" . $row["img_path"];
+                        $imgPath = "../../../" . $row["img_path"];
                         if (file_exists($imgPath)) {
                             if (unlink($imgPath)) {
                                 $name = $_FILES["img"]["name"];
                                 $path_ext = strtolower(pathinfo(basename($name), PATHINFO_EXTENSION));
                                 $new_img_name = "IMG_" . uniqid(uniqid(), true) . "." . $path_ext;
-                                $target_dir = "../../uploads/$new_img_name";
+                                $target_dir = "../../../uploads/$new_img_name";
 
 
                                 if ($_FILES["img"]["size"] > 10000000) {
@@ -201,7 +215,7 @@
                             <div class="form-box">
                                 <label for="img">
                                     <div>
-                                        <img src="../../<?php echo $row["img_path"] ?>" data-img>
+                                        <img src="../../../<?php echo $row["img_path"] ?>" data-img>
                                     </div>
                                 </label>
                                 <div style="display: flex; gap: 6px;">
@@ -236,8 +250,8 @@
 
     </section>
     <?php $conn_db->close() ?>
-    <script src="../../js/admin/index.js"></script>
-    <script src="../../js/admin/photo.js"></script>
+    <script src="../../../js/admin/index.js"></script>
+    <script src="../../../js/admin/photo.js"></script>
 </body>
 
 </html>

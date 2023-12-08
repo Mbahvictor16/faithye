@@ -4,20 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <link rel="stylesheet" href="../../../css/admin/admin.css">
     <title>All Products</title>
 </head>
 
 <body>
     <?php
-    include "../admin.php";
+    include "../../admin.php";
     if (!isset($_COOKIE["cookie"])) {
-        header("Location: ../../login");
+        header("Location: ../../../login");
         exit;
     }
     session_start();
     if (empty($_SESSION["session_admin"])) {
-        header("Location: ../login");
+        header("Location: ../../login");
     }
     ?>
 
@@ -29,12 +29,23 @@
                 </div>
                 <nav>
                     <ul>
+                        <li><a href="../../">Home</a></li>
+                    </ul>
+                    <ul class="product-nav">
+                        <h3>Products</h3>
                         <li>
-                            <a href="../">Home</a>
+                            <a href="">All Products</a>
                         </li>
                         <li>
                             <a href="../add_products/">Add Products</a>
                         </li>
+                    </ul>
+
+                    <ul class="blog-nav">
+                        <h3>Blogs</h3>
+
+                        <li><a href="../../blogs/all_blogs/">All Blogs</a></li>
+                        <li><a href="../../blogs/add_blogs/">Add Blogs</a></li>
                     </ul>
                 </nav>
             </div>
@@ -46,9 +57,10 @@
 
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["LOGOUT"])) {
+                    session_start();
                     session_unset();
                     session_destroy();
-                    header("Location: ../login");
+                    header("Location: ../../login");
                 }
                 ?>
             </div>
@@ -64,7 +76,7 @@
             ?>
                     <div class="product">
                         <div class="product-img">
-                            <img src="../../<?php echo $row["img_path"]; ?>" alt="">
+                            <img src="../../../<?php echo $row["img_path"]; ?>" alt="">
                         </div>
                         <div class="product-details">
                             <h3>
@@ -130,8 +142,8 @@
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
                                             $imgPath = $row["img_path"];
-                                            if (file_exists("../../$imgPath")) {
-                                                if (unlink("../../$imgPath")) {
+                                            if (file_exists("../../../$imgPath")) {
+                                                if (unlink("../../../$imgPath")) {
                                                     DeleteID($delete_p_id, $conn_db);
                                                 }
                                             } else {
@@ -151,7 +163,7 @@
         </main>
     </section>
 
-    <script src="../../js/admin/index.js"></script>
+    <script src="../../../js/admin/index.js"></script>
 </body>
 
 </html>

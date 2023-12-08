@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <link rel="stylesheet" href="../../../css/admin/admin.css">
     <title>Add Product</title>
 
     <style>
@@ -41,14 +41,14 @@
 
 <body>
     <?php
-    include "../admin.php";
+    include "../../admin.php";
     if (!isset($_COOKIE["cookie"])) {
-        header("Location: ../../login");
+        header("Location: ../../../login");
         exit;
     }
     session_start();
     if (empty($_SESSION["session_admin"])) {
-        header("Location: ../login");
+        header("Location: ../../login");
     }
     ?>
 
@@ -69,12 +69,24 @@
                 </div>
                 <nav>
                     <ul>
-                        <li>
-                            <a href="../">Home</a>
-                        </li>
+                        <li><a href="../../">Home</a></li>
+                    </ul>
+                    <ul class="product-nav">
+                        <h3>Products</h3>
                         <li>
                             <a href="../all_products/">All Products</a>
                         </li>
+                        <li>
+                            <a href="">Add Products</a>
+                        </li>
+                    </ul>
+
+                    <ul class="blog-nav">
+                        <h3>Blogs</h3>
+
+                        <li><a href="../../blogs/all_blogs/">All Blogs</a></li>
+                        <li><a href="../../blogs/add_blogs/">Add Blogs</a></li>
+
                     </ul>
                 </nav>
             </div>
@@ -86,18 +98,19 @@
 
                 <?php
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["LOGOUT"])) {
+                    session_start();
                     session_unset();
                     session_destroy();
-                    header("Location: ../login");
+                    header("Location: ../../login");
                 }
                 ?>
             </div>
         </aside>
         <?php
-        if (is_dir("../../uploads")) {
+        if (is_dir("../../../uploads")) {
             echo "<pre style='display:none;'>Folder exists</pre>";
         } else {
-            mkdir("../../uploads");
+            mkdir("../../../uploads");
         }
 
         $_id = $p_id = $p_name = $p_price = $p_desc = $p_quan = "";
@@ -111,7 +124,7 @@
             $name = $_FILES["img"]["name"];
             $path_ext = strtolower(pathinfo(basename($name), PATHINFO_EXTENSION));
             $new_img_name = "IMG_" . uniqid(uniqid(), true) . "." . $path_ext;
-            $target_dir = "../../uploads/$new_img_name";
+            $target_dir = "../../../uploads/$new_img_name";
 
             $uploadOK = true;
 
@@ -198,9 +211,8 @@
                     </div>
 
                     <div class="form-box">
-                        <label for="price">Description</label>
+                        <label for="p_desc">Description</label>
                         <div>
-                            <label for="p_desc"></label>
                             <textarea name="p_desc" id="p_desc" cols="30" rows="10" required></textarea>
                         </div>
                     </div>
@@ -218,8 +230,8 @@
     <?php
     $conn_db->close();
     ?>
-    <script src="../../js/admin/index.js"></script>
-    <script src="../../js/admin/photo.js"></script>
+    <script src="../../../js/admin/index.js"></script>
+    <script src="../../../js/admin/photo.js"></script>
 </body>
 
 </html>
